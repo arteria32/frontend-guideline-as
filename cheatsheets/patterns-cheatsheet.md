@@ -139,8 +139,41 @@ class SuperDog extends Dog {
 ![Prototype-pattern2](/assets/prototype2.png)
 ### Summary
 Данный прототип позволяет проще получать и наследовать свойства других объектов. Цепочка наследований уменьшает и количество кода, и объем занимаемой памяти.
+## Паттерн наблюдателя
+При реализации паттерна наблюдателя определяются:
+- `observers` - объекты, подписанные на другой объект, которые получают данные через подписку
+- `observable` - объект, который щарит данные для своих подписчиков
 
+`observable` объект обычно содержит следующие поля:
 
+- `observers`: список подписчиков
+- `subscribe()`: метод, который добавляет функцию-коллбек в массив подписчиков
+- `unsubscribe()`: удаление из массива подписчиков
+- `notify()`: уведомление всех подписчиков
+  ![Observable](/assets/observable-example.png)
+### Пример
+```
+class Observable {
+  constructor() {
+    this.observers = [];
+  }
+
+  subscribe(func) {
+    this.observers.push(func);
+  }
+
+  unsubscribe(func) {
+    this.observers = this.observers.filter((observer) => observer !== func);
+  }
+
+  notify(data) {
+    this.observers.forEach((observer) => observer(data));
+  }
+}
+```
+### Summary
+Полезный паттерн, повсеместно  используемый.
+На базе этого паттерна реализована библиотека [RxJS](https://rxjs-dev.firebaseapp.com/)
 
 # Паттерны рендеринга
 # Паттерны производительности
