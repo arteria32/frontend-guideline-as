@@ -174,6 +174,40 @@ class Observable {
 ### Summary
 Полезный паттерн, повсеместно  используемый.
 На базе этого паттерна реализована библиотека [RxJS](https://rxjs-dev.firebaseapp.com/)
+## Посредник
+Паттерн посредника позволяет наладить общение компонентов через единую точкку-объект или функцию.
+**Вместо:**
+![Bad connection of objects](/assets//bad-connection.png)
+**Получается это**
+![Good connection of objects](/assets//good-connection.png)
+Вместо того, чтобы позволять каждому объекту напрямую взаимодействовать с другими объектами, что приводит к связи "многие ко многим", запросы объекта обрабатываются посредником. Посредник обрабатывает этот запрос и отправляет его туда, куда должен.
+### Пример
+Примером данного паттерна групповой чат. Пользователи не хотят общаться напрямую, они отправляют сообщения в групповой чат
+```
+class ChatRoom {
+  logMessage(user, message) {
+    const time = new Date();
+    const sender = user.getName();
+
+    console.log(`${time} [${sender}]: ${message}`);
+  }
+}
+
+class User {
+  constructor(name, chatroom) {
+    this.name = name;
+    this.chatroom = chatroom;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  send(message) {
+    this.chatroom.logMessage(this, message);
+  }
+}
+```
 
 # Паттерны рендеринга
 # Паттерны производительности
