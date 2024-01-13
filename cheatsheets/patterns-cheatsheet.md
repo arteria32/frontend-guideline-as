@@ -41,7 +41,7 @@ const dog1 = new Dog("Daisy");
 const dog2 = new Dog("Max");
 const dog3 = new Dog("Spot");
 ```
-Все свойства попределенные в классе автоматически добавляются в прототип
+Все свойства, определенные в классе, автоматически добавляются в прототип
 ```
 console.log(Dog.prototype);
 // constructor: ƒ Dog(name, breed) bark: ƒ bark()
@@ -113,8 +113,8 @@ export default singletonCounter;
 ```
 Пусть у нас есть следующие файлы
 - `counter.js`: содержит singletonCounter
-- `redButton.js`: Красная нопка, которая импортирует счетчик и меняет его
-- `blueButton.js`: Синяя нопка, которая импортирует счетчик и меняет его
+- `redButton.js`: Красная кнопка, которая импортирует счетчик и меняет его
+- `blueButton.js`: Синяя кнопка, которая импортирует счетчик и меняет его
 
 ![Img Singleton](/assets/singleton.png)
 
@@ -207,7 +207,7 @@ const createBook = (title, author, isbn) => {
 
 ```
 Создаем метод на добавление экземпляра уже существующей книги 
-Метод `addBook` будет получать ссылку на уже существующую в `isbnNumbers` книгу  и добавлять  ссылку в массив доступных экзмепляров  книг `bookList`
+Метод `addBook` будет получать ссылку на уже существующую в `isbnNumbers` книгу  и добавлять  ссылку в массив доступных экземпляров  книг `bookList`
 ```
 const bookList = [];
 
