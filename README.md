@@ -187,6 +187,164 @@ if (x == undefined) { ... }
 ```
 
 ## HTML/CSS
+### Семантика 
+**Bad**
+```
+<div id=main>
+  <div class=article>
+    <div class=header>
+      <h1>Blog post</h1>
+      <p>Published: <span>21st Feb, 2015</span></p>
+    </div>
+    <p>…</p>
+  </div>
+</div>
+```
+**Good**
+```
+<main>
+  <article>
+    <header>
+      <h1>Blog post</h1>
+      <p>Published: <time datetime=2015-02-21>21st Feb, 2015</time></p>
+    </header>
+    <p>…</p>
+  </article>
+</main>
+
+```
+
+### БЭМ
+Использовать не только как правила наименования классов, а как шпоргалку на разделение хтмл контента на модули, и стили на классы
+[БЭМ](https://ru.bem.info/?ysclid=lrdnt4ce8h601236929)
+### Общие рекомендации по CSS
+1. Избегать хардкода цветов, различных растояний или размеров  
+    **Bad**
+    ```
+    .button {
+    color: #333;
+    padding: 16px;
+    }
+    ```
+    **Good**
+    ```
+    .button {
+    color: var(--color-primary);
+    padding: var(--space-sm);
+    }
+
+    ```
+2. Не использовать ID никогда
+    **Bad**
+    ```
+    #header { ... }
+    #section { ... }
+    ```
+    **Good**
+    ```
+    .header { ... }
+    .section { ... }
+    ```
+3.  Не определять стили напрямую в HTML/JSX
+    **Bad**
+    ```
+    input[type="text"] { ... }
+    header
+    section
+    ```
+    **Good**
+    ```
+    .form-control { ... }
+    .header { ... }
+    .section { ... }
+    ```
+4. Избегайте вложенности элементов - это снижает проивзодительность и читаемость css
+  **Bad**
+    ```
+   .navbar ul { ... }
+    .navbar ul li { ... }
+    .navbar ul li a { ... }
+    ```
+    **Good**
+    ```
+    .navbar { ... }
+    .nav { ... }
+    .nav__item { ... }
+    .nav__link { ... }
+    ```
+5.  Избегайте перегрузку селекторов.
+    **Bad**
+    ```
+    img[src$=svg], ul > li:first-child {
+    opacity: 0;
+    }
+    ```
+    **Good**
+    ```
+    [src$=svg], ul > :first-child {
+    opacity: 0;
+    }
+    ```
+6. Минимизируйте сочетания селекторов связанных с DOM. Иногда, лучше добавить лишний класс элементу, который вы хотите найти, чем искать его через три структурных селектора: псевдо-класс, потомок, комбинатор.
+   **Bad**
+    ```
+    div:first-of-type :last-child > p ~ *
+    ```
+    **Good**
+    ```
+    div:first-of-type .info
+
+    ```
+7. Специфичность Не используйте значения и селекторы, которые нельзя переопределить. Минимизируйте использование id (идентификаторов) и избегайте правило `!important`
+    **Bad**
+    ```
+    .bar {
+    color: green !important;
+    }
+    .foo {
+    color: red;
+    }
+    ```
+    **Good**
+    ```
+    .foo {
+    color: red;
+    }
+    .foo.bar {
+    color: green;
+    }
+    ```
+
+8. Переопределение стилей селекторов затрудняет отладку. Избегайте этого, если можете.
+    **Bad**
+    ```
+    li {
+    visibility: hidden;
+    }
+    li:first-child {
+    visibility: visible;
+    }
+    ```
+    **Good**
+    ```
+    li + li {
+    visibility: hidden;
+    }
+    ```
+
+9. Не дублируйте определения селекторов, стили которых и так могут передаваться по наследству.
+    **Bad**
+    ```
+    div h1, div p {
+    text-shadow: 0 1px 0 #fff;
+    }
+    ```
+    **Good**
+    ```
+    div {
+    text-shadow: 0 1px 0 #fff;
+    }
+    ```
 ## GIT
 ### Зачем правильно коммитить ? 
 * Проще отслеживать изменения
@@ -207,4 +365,6 @@ if (x == undefined) { ... }
 ...In coming
 # После завершения работы
 ## Rewiew
+...In coming
 ## Тесты
+...In coming
