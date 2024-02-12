@@ -502,6 +502,67 @@ class SuperArray extends Array {
 ![this in js ](/assets/scheme-for-this.jpg)
 Full article: https://habr.com/ru/articles/785872/
 
+
+
+
+### Правила нейминга
+1. Используйте английский язык
+   **Bad**
+```
+const imya = 'Gustavo'
+const druzya = ['Kate', 'John']
+```
+**Good**
+```
+const firstName = 'Gustavo'
+const friends = ['Kate', 'John'] 
+```
+2. Название должно быть **Коротким, Понятным, Емким**
+
+   **Bad**
+```
+const a = 5 // "a" could mean anything
+const isPaginatable = a > 10 // "Paginatable" sounds extremely unnatural
+const shouldPaginatize = a > 10 // Made up verbs are so much fun!
+
+```
+**Good**
+```
+const postCount = 5
+const hasPagination = postCount > 10
+const shouldPaginate = postCount > 10 // alternatively
+```
+3. Избегайте сокращений
+  
+ **Bad**
+```
+const onItmClk = () => {}
+```
+**Good**
+```
+const onItemClick = () => {}
+```
+
+### Паттерн наименования функций (A/HC/LC Pattern)
+
+
+```
+prefix? + action (A) + high context (HC) + low context? (LC)
+```
+
+Take a look at how this pattern may be applied in the table below.
+
+| Name                   | Prefix(Префикс) | Action (A) (Действие) | High context (HC) (Главный контекст) | Low context (LC)  (Дополнительный контекст) |
+| ---------------------- | --------------- | --------------------- | ------------------------------------ | ------------------------------------------- |
+| `getUser`              |                 | `get`                 | `User`                               |                                             |
+| `getUserMessages`      |                 | `get`                 | `User`                               | `Messages`                                  |
+| `handleClickOutside`   |                 | `handle`              | `Click`                              | `Outside`                                   |
+| `shouldDisplayMessage` | `should`        | `Display`             | `Message`                            |                                             |
+
+**Actions(Действия):** get,set,reset,remove,delete,compose,handle
+**Context**-вещь, объект, с которым взаимодействует, обрабатывает функция 
+**Prefix**:is,has,should,min,max,prev,next
+
 ### Правила типизации 
 1. **Типы>Интерфейсов**. Все, что не касается классов и их наследия, использовать типы.
 2. **Типизировать все, приходящее с бека**. Делать это можно с помощью Json2Ts (beshanoe.github.io)
